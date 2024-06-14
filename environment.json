@@ -1,0 +1,45 @@
+{
+	"id": "216c833d-5413-427f-a378-2eeb41ef89a0",
+	"name": "TestTask",
+	"values": [
+		{
+			"key": "URL_auth",
+			"value": "https://www.chitai-gorod.ru/",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "URL",
+			"value": "https://web-gate.chitai-gorod.ru/api/v1/cart",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "time_limit",
+			"value": "900",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "id_book",
+			"value": "3038490",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "inner_id_book",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-06-13T17:34:09.868Z",
+	"_postman_exported_using": "Postman/9.19.0"
+}

@@ -1,0 +1,1225 @@
+{
+	"info": {
+		"_postman_id": "62e3c59d-678d-403d-822b-25dedb1d8c51",
+		"name": "TestTask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "preconditional",
+			"item": [
+				{
+					"name": "Get_auth_token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.environment.set('token', pm.cookies.get('access-token'))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_auth}}",
+							"host": [
+								"{{URL_auth}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1.Пустая корзина",
+			"item": [
+				{
+					"name": "get_clear_cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var schema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"addBonuses\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"cost\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"costGiftWrap\": {\r",
+									"      \"type\": \"null\"\r",
+									"    },\r",
+									"    \"costWithBonuses\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"costWithSale\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"disabledProducts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"discount\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"gifts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"preorderProducts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"products\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"promoCode\": {\r",
+									"      \"type\": \"null\"\r",
+									"    },\r",
+									"    \"weight\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"addBonuses\",\r",
+									"    \"cost\",\r",
+									"    \"costGiftWrap\",\r",
+									"    \"costWithBonuses\",\r",
+									"    \"costWithSale\",\r",
+									"    \"disabledProducts\",\r",
+									"    \"discount\",\r",
+									"    \"gifts\",\r",
+									"    \"preorderProducts\",\r",
+									"    \"products\",\r",
+									"    \"promoCode\",\r",
+									"    \"weight\"\r",
+									"  ]\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema (schema);\r",
+									"});\r",
+									"\r",
+									"pm.test('check values params', function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.test('check addBonuses', function () {\r",
+									"        pm.expect(responseJson.addBonuses).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check cost', function () {\r",
+									"        pm.expect(responseJson.cost).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check costGiftWrap', function () {\r",
+									"        pm.expect(responseJson.costGiftWrap).to.eql(null);\r",
+									"    });\r",
+									"    pm.test('check costWithBonuses', function () {\r",
+									"        pm.expect(responseJson.costWithBonuses).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check costWithSale', function () {\r",
+									"        pm.expect(responseJson.costWithSale).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check disabledProducts', function () {\r",
+									"        pm.expect(responseJson.disabledProducts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check discount', function () {\r",
+									"        pm.expect(responseJson.discount).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check gifts', function () {\r",
+									"        pm.expect(responseJson.gifts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check preorderProducts', function () {\r",
+									"        pm.expect(responseJson.preorderProducts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check products', function () {\r",
+									"        pm.expect(responseJson.products).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check promoCode', function () {\r",
+									"        pm.expect(responseJson.promoCode).to.eql(null);\r",
+									"    });\r",
+									"    pm.test('check weight', function () {\r",
+									"        pm.expect(responseJson.weight).to.eql(0);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test('check response time', function () {\r",
+									"    let time_limit = parseInt(pm.variables.get(\"time_limit\"))\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(time_limit);\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}",
+							"host": [
+								"{{URL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2.Добавить товар",
+			"item": [
+				{
+					"name": "add_product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{id_book}},\r\n    \"adData\": {\r\n        \"item_list_name\": \"index\",\r\n        \"product_shelf\": \"Новинки литературы\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/product",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var schema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"addBonuses\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"cost\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"costGiftWrap\": {\r",
+									"      \"type\": \"null\"\r",
+									"    },\r",
+									"    \"costWithBonuses\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"costWithSale\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"disabledProducts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"discount\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"gifts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"preorderProducts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"products\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": [\r",
+									"        {\r",
+									"          \"type\": \"object\",\r",
+									"          \"properties\": {\r",
+									"            \"adData\": {\r",
+									"              \"type\": \"object\",\r",
+									"              \"properties\": {\r",
+									"                \"item_list_name\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                },\r",
+									"                \"product_shelf\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                }\r",
+									"              },\r",
+									"              \"required\": [\r",
+									"                \"item_list_name\",\r",
+									"                \"product_shelf\"\r",
+									"              ]\r",
+									"            },\r",
+									"            \"authors\": {\r",
+									"              \"type\": \"array\",\r",
+									"              \"items\": [\r",
+									"                {\r",
+									"                  \"type\": \"object\",\r",
+									"                  \"properties\": {\r",
+									"                    \"firstName\": {\r",
+									"                      \"type\": \"string\"\r",
+									"                    },\r",
+									"                    \"id\": {\r",
+									"                      \"type\": \"integer\"\r",
+									"                    },\r",
+									"                    \"isForeignAgent\": {\r",
+									"                      \"type\": \"boolean\"\r",
+									"                    },\r",
+									"                    \"lastName\": {\r",
+									"                      \"type\": \"string\"\r",
+									"                    },\r",
+									"                    \"middleName\": {\r",
+									"                      \"type\": \"string\"\r",
+									"                    },\r",
+									"                    \"url\": {\r",
+									"                      \"type\": \"string\"\r",
+									"                    }\r",
+									"                  },\r",
+									"                  \"required\": [\r",
+									"                    \"firstName\",\r",
+									"                    \"id\",\r",
+									"                    \"isForeignAgent\",\r",
+									"                    \"lastName\",\r",
+									"                    \"middleName\",\r",
+									"                    \"url\"\r",
+									"                  ]\r",
+									"                }\r",
+									"              ]\r",
+									"            },\r",
+									"            \"category\": {\r",
+									"              \"type\": \"object\",\r",
+									"              \"properties\": {\r",
+									"                \"id\": {\r",
+									"                  \"type\": \"integer\"\r",
+									"                },\r",
+									"                \"slug\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                },\r",
+									"                \"title\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                },\r",
+									"                \"url\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                }\r",
+									"              },\r",
+									"              \"required\": [\r",
+									"                \"id\",\r",
+									"                \"slug\",\r",
+									"                \"title\",\r",
+									"                \"url\"\r",
+									"              ]\r",
+									"            },\r",
+									"            \"coauthors\": {\r",
+									"              \"type\": \"array\",\r",
+									"              \"items\": {}\r",
+									"            },\r",
+									"            \"cost\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"disabledBonuses\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"fullCost\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"fullPrice\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"goodsId\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"id\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"inSubscription\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"isBook\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"isBookmarks\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"isMagic\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"nForM\": {\r",
+									"              \"type\": \"object\",\r",
+									"              \"properties\": {\r",
+									"                \"m\": {\r",
+									"                  \"type\": \"integer\"\r",
+									"                },\r",
+									"                \"n\": {\r",
+									"                  \"type\": \"integer\"\r",
+									"                }\r",
+									"              },\r",
+									"              \"required\": [\r",
+									"                \"m\",\r",
+									"                \"n\"\r",
+									"              ]\r",
+									"            },\r",
+									"            \"picture\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"preOrder\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"price\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"publisher\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"quantity\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"sale\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"status\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"stock\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"title\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"url\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"weight\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            }\r",
+									"          },\r",
+									"          \"required\": [\r",
+									"            \"adData\",\r",
+									"            \"authors\",\r",
+									"            \"category\",\r",
+									"            \"coauthors\",\r",
+									"            \"cost\",\r",
+									"            \"disabledBonuses\",\r",
+									"            \"fullCost\",\r",
+									"            \"fullPrice\",\r",
+									"            \"goodsId\",\r",
+									"            \"id\",\r",
+									"            \"inSubscription\",\r",
+									"            \"isBook\",\r",
+									"            \"isBookmarks\",\r",
+									"            \"isMagic\",\r",
+									"            \"nForM\",\r",
+									"            \"picture\",\r",
+									"            \"preOrder\",\r",
+									"            \"price\",\r",
+									"            \"publisher\",\r",
+									"            \"quantity\",\r",
+									"            \"sale\",\r",
+									"            \"status\",\r",
+									"            \"stock\",\r",
+									"            \"title\",\r",
+									"            \"url\",\r",
+									"            \"weight\"\r",
+									"          ]\r",
+									"        }\r",
+									"      ]\r",
+									"    },\r",
+									"    \"promoCode\": {\r",
+									"      \"type\": \"null\"\r",
+									"    },\r",
+									"    \"weight\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"addBonuses\",\r",
+									"    \"cost\",\r",
+									"    \"costGiftWrap\",\r",
+									"    \"costWithBonuses\",\r",
+									"    \"costWithSale\",\r",
+									"    \"disabledProducts\",\r",
+									"    \"discount\",\r",
+									"    \"gifts\",\r",
+									"    \"preorderProducts\",\r",
+									"    \"products\",\r",
+									"    \"promoCode\",\r",
+									"    \"weight\"\r",
+									"  ]\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema (schema);\r",
+									"});\r",
+									"\r",
+									"pm.test('check values params', function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.test('check addBonuses', function () {\r",
+									"        pm.expect(responseJson.addBonuses).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check cost', function () {\r",
+									"        pm.expect(responseJson.cost).to.eql(794);\r",
+									"    });\r",
+									"    pm.test('check costGiftWrap', function () {\r",
+									"        pm.expect(responseJson.costGiftWrap).to.eql(null);\r",
+									"    });\r",
+									"    pm.test('check costWithBonuses', function () {\r",
+									"        pm.expect(responseJson.costWithBonuses).to.eql(662);\r",
+									"    });\r",
+									"    pm.test('check costWithSale', function () {\r",
+									"        pm.expect(responseJson.costWithSale).to.eql(662);\r",
+									"    });\r",
+									"    pm.test('check disabledProducts', function () {\r",
+									"        pm.expect(responseJson.disabledProducts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check discount', function () {\r",
+									"        pm.expect(responseJson.discount).to.eql(132);\r",
+									"    });\r",
+									"    pm.test('check gifts', function () {\r",
+									"        pm.expect(responseJson.gifts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check preorderProducts', function () {\r",
+									"        pm.expect(responseJson.preorderProducts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check promoCode', function () {\r",
+									"        pm.expect(responseJson.promoCode).to.eql(null);\r",
+									"    });\r",
+									"    pm.test('check weight', function () {\r",
+									"        pm.expect(responseJson.weight).to.eql(410);\r",
+									"    });\r",
+									"    pm.test('check products id', function () {\r",
+									"        let id_book = parseInt(pm.variables.get(\"id_book\"));\r",
+									"        pm.expect(responseJson.products[0].goodsId).to.eql(id_book);\r",
+									"    });\r",
+									"    pm.test('check products quantity', function () {\r",
+									"        pm.expect(responseJson.products[0].quantity).to.eql(1);\r",
+									"    });\r",
+									"    pm.environment.set(\"inner_id_book\", responseJson.products[0].id);\r",
+									"});\r",
+									"\r",
+									"pm.test('check response time', function () {\r",
+									"    let time_limit = parseInt(pm.variables.get(\"time_limit\"))\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(time_limit);\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}",
+							"host": [
+								"{{URL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3.Изменить количество",
+			"item": [
+				{
+					"name": "edit_quantity_product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": {{inner_id_book}},\r\n        \"quantity\": 3\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}",
+							"host": [
+								"{{URL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var schema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"addBonuses\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"cost\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"costGiftWrap\": {\r",
+									"      \"type\": \"null\"\r",
+									"    },\r",
+									"    \"costWithBonuses\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"costWithSale\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"disabledProducts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"discount\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"gifts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"preorderProducts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"products\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": [\r",
+									"        {\r",
+									"          \"type\": \"object\",\r",
+									"          \"properties\": {\r",
+									"            \"adData\": {\r",
+									"              \"type\": \"object\",\r",
+									"              \"properties\": {\r",
+									"                \"item_list_name\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                },\r",
+									"                \"product_shelf\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                }\r",
+									"              },\r",
+									"              \"required\": [\r",
+									"                \"item_list_name\",\r",
+									"                \"product_shelf\"\r",
+									"              ]\r",
+									"            },\r",
+									"            \"authors\": {\r",
+									"              \"type\": \"array\",\r",
+									"              \"items\": [\r",
+									"                {\r",
+									"                  \"type\": \"object\",\r",
+									"                  \"properties\": {\r",
+									"                    \"firstName\": {\r",
+									"                      \"type\": \"string\"\r",
+									"                    },\r",
+									"                    \"id\": {\r",
+									"                      \"type\": \"integer\"\r",
+									"                    },\r",
+									"                    \"isForeignAgent\": {\r",
+									"                      \"type\": \"boolean\"\r",
+									"                    },\r",
+									"                    \"lastName\": {\r",
+									"                      \"type\": \"string\"\r",
+									"                    },\r",
+									"                    \"middleName\": {\r",
+									"                      \"type\": \"string\"\r",
+									"                    },\r",
+									"                    \"url\": {\r",
+									"                      \"type\": \"string\"\r",
+									"                    }\r",
+									"                  },\r",
+									"                  \"required\": [\r",
+									"                    \"firstName\",\r",
+									"                    \"id\",\r",
+									"                    \"isForeignAgent\",\r",
+									"                    \"lastName\",\r",
+									"                    \"middleName\",\r",
+									"                    \"url\"\r",
+									"                  ]\r",
+									"                }\r",
+									"              ]\r",
+									"            },\r",
+									"            \"category\": {\r",
+									"              \"type\": \"object\",\r",
+									"              \"properties\": {\r",
+									"                \"id\": {\r",
+									"                  \"type\": \"integer\"\r",
+									"                },\r",
+									"                \"slug\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                },\r",
+									"                \"title\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                },\r",
+									"                \"url\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                }\r",
+									"              },\r",
+									"              \"required\": [\r",
+									"                \"id\",\r",
+									"                \"slug\",\r",
+									"                \"title\",\r",
+									"                \"url\"\r",
+									"              ]\r",
+									"            },\r",
+									"            \"coauthors\": {\r",
+									"              \"type\": \"array\",\r",
+									"              \"items\": {}\r",
+									"            },\r",
+									"            \"cost\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"disabledBonuses\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"fullCost\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"fullPrice\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"goodsId\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"id\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"inSubscription\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"isBook\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"isBookmarks\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"isMagic\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"nForM\": {\r",
+									"              \"type\": \"object\",\r",
+									"              \"properties\": {\r",
+									"                \"m\": {\r",
+									"                  \"type\": \"integer\"\r",
+									"                },\r",
+									"                \"n\": {\r",
+									"                  \"type\": \"integer\"\r",
+									"                }\r",
+									"              },\r",
+									"              \"required\": [\r",
+									"                \"m\",\r",
+									"                \"n\"\r",
+									"              ]\r",
+									"            },\r",
+									"            \"picture\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"preOrder\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"price\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"publisher\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"quantity\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"sale\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"status\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"stock\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"title\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"url\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"weight\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            }\r",
+									"          },\r",
+									"          \"required\": [\r",
+									"            \"adData\",\r",
+									"            \"authors\",\r",
+									"            \"category\",\r",
+									"            \"coauthors\",\r",
+									"            \"cost\",\r",
+									"            \"disabledBonuses\",\r",
+									"            \"fullCost\",\r",
+									"            \"fullPrice\",\r",
+									"            \"goodsId\",\r",
+									"            \"id\",\r",
+									"            \"inSubscription\",\r",
+									"            \"isBook\",\r",
+									"            \"isBookmarks\",\r",
+									"            \"isMagic\",\r",
+									"            \"nForM\",\r",
+									"            \"picture\",\r",
+									"            \"preOrder\",\r",
+									"            \"price\",\r",
+									"            \"publisher\",\r",
+									"            \"quantity\",\r",
+									"            \"sale\",\r",
+									"            \"status\",\r",
+									"            \"stock\",\r",
+									"            \"title\",\r",
+									"            \"url\",\r",
+									"            \"weight\"\r",
+									"          ]\r",
+									"        }\r",
+									"      ]\r",
+									"    },\r",
+									"    \"promoCode\": {\r",
+									"      \"type\": \"null\"\r",
+									"    },\r",
+									"    \"weight\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"addBonuses\",\r",
+									"    \"cost\",\r",
+									"    \"costGiftWrap\",\r",
+									"    \"costWithBonuses\",\r",
+									"    \"costWithSale\",\r",
+									"    \"disabledProducts\",\r",
+									"    \"discount\",\r",
+									"    \"gifts\",\r",
+									"    \"preorderProducts\",\r",
+									"    \"products\",\r",
+									"    \"promoCode\",\r",
+									"    \"weight\"\r",
+									"  ]\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema (schema);\r",
+									"});\r",
+									"\r",
+									"pm.test('check values params', function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.test('check addBonuses', function () {\r",
+									"        pm.expect(responseJson.addBonuses).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check cost', function () {\r",
+									"        pm.expect(responseJson.cost).to.eql(2382);\r",
+									"    });\r",
+									"    pm.test('check costGiftWrap', function () {\r",
+									"        pm.expect(responseJson.costGiftWrap).to.eql(null);\r",
+									"    });\r",
+									"    pm.test('check costWithBonuses', function () {\r",
+									"        pm.expect(responseJson.costWithBonuses).to.eql(1905);\r",
+									"    });\r",
+									"    pm.test('check costWithSale', function () {\r",
+									"        pm.expect(responseJson.costWithSale).to.eql(1905);\r",
+									"    });\r",
+									"    pm.test('check disabledProducts', function () {\r",
+									"        pm.expect(responseJson.disabledProducts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check discount', function () {\r",
+									"        pm.expect(responseJson.discount).to.eql(477);\r",
+									"    });\r",
+									"    pm.test('check gifts', function () {\r",
+									"        pm.expect(responseJson.gifts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check preorderProducts', function () {\r",
+									"        pm.expect(responseJson.preorderProducts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check promoCode', function () {\r",
+									"        pm.expect(responseJson.promoCode).to.eql(null);\r",
+									"    });\r",
+									"    pm.test('check weight', function () {\r",
+									"        pm.expect(responseJson.weight).to.eql(1230);\r",
+									"    });\r",
+									"    pm.test('check products id', function () {\r",
+									"        let id_book = parseInt(pm.variables.get(\"id_book\"));\r",
+									"        pm.expect(responseJson.products[0].goodsId).to.eql(id_book);\r",
+									"    });\r",
+									"    pm.test('check products quantity', function () {\r",
+									"        pm.expect(responseJson.products[0].quantity).to.eql(3);\r",
+									"    });\r",
+									"    pm.environment.set(\"inner_id_book\", responseJson.products[0].id);\r",
+									"});\r",
+									"\r",
+									"pm.test('check response time', function () {\r",
+									"    let time_limit = parseInt(pm.variables.get(\"time_limit\"))\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(time_limit);\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}",
+							"host": [
+								"{{URL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4.Удалить товар",
+			"item": [
+				{
+					"name": "delete_product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{id_book}},\r\n    \"adData\": {\r\n        \"item_list_name\": \"index\",\r\n        \"product_shelf\": \"Новинки литературы\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/product/{{inner_id_book}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product",
+								"{{inner_id_book}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_clear_cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var schema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"addBonuses\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"cost\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"costGiftWrap\": {\r",
+									"      \"type\": \"null\"\r",
+									"    },\r",
+									"    \"costWithBonuses\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"costWithSale\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"disabledProducts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"discount\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"gifts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"preorderProducts\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"products\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"promoCode\": {\r",
+									"      \"type\": \"null\"\r",
+									"    },\r",
+									"    \"weight\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"addBonuses\",\r",
+									"    \"cost\",\r",
+									"    \"costGiftWrap\",\r",
+									"    \"costWithBonuses\",\r",
+									"    \"costWithSale\",\r",
+									"    \"disabledProducts\",\r",
+									"    \"discount\",\r",
+									"    \"gifts\",\r",
+									"    \"preorderProducts\",\r",
+									"    \"products\",\r",
+									"    \"promoCode\",\r",
+									"    \"weight\"\r",
+									"  ]\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema (schema);\r",
+									"});\r",
+									"\r",
+									"pm.test('check values params', function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.test('check addBonuses', function () {\r",
+									"        pm.expect(responseJson.addBonuses).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check cost', function () {\r",
+									"        pm.expect(responseJson.cost).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check costGiftWrap', function () {\r",
+									"        pm.expect(responseJson.costGiftWrap).to.eql(null);\r",
+									"    });\r",
+									"    pm.test('check costWithBonuses', function () {\r",
+									"        pm.expect(responseJson.costWithBonuses).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check costWithSale', function () {\r",
+									"        pm.expect(responseJson.costWithSale).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check disabledProducts', function () {\r",
+									"        pm.expect(responseJson.disabledProducts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check discount', function () {\r",
+									"        pm.expect(responseJson.discount).to.eql(0);\r",
+									"    });\r",
+									"    pm.test('check gifts', function () {\r",
+									"        pm.expect(responseJson.gifts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check preorderProducts', function () {\r",
+									"        pm.expect(responseJson.preorderProducts).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check products', function () {\r",
+									"        pm.expect(responseJson.products).to.eql([]);\r",
+									"    });\r",
+									"    pm.test('check promoCode', function () {\r",
+									"        pm.expect(responseJson.promoCode).to.eql(null);\r",
+									"    });\r",
+									"    pm.test('check weight', function () {\r",
+									"        pm.expect(responseJson.weight).to.eql(0);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test('check response time', function () {\r",
+									"    let time_limit = parseInt(pm.variables.get(\"time_limit\"))\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(time_limit);\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}",
+							"host": [
+								"{{URL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
