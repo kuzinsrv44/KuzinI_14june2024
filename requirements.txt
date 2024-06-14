@@ -1,0 +1,7 @@
+jsonschema==4.22.0
+pytest==7.4.3
+pytest_check==2.3.1
+allure-pytest==2.9.45
+pytest-xdist==3.5.0
+Requests==2.32.3
+selenium==4.21.0
